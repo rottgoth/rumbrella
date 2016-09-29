@@ -36,7 +36,7 @@ defmodule InfoSysTest do
     assert_receive {:DOWN, ^ref, :process, _pid, _reason}
   end
 
-  test "compute/2 with backend results" do 
+  test "compute/2 with backend results" do
     assert [%Result{backend: "test", text: "result"}] =
            InfoSys.compute("result", backends: [TestBackend])
   end
