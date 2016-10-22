@@ -1,5 +1,5 @@
 
-APP="rumbl"
+APP="rumbrella"
 
 BUILD_HOST="54.153.13.201"
 BUILD_USER="builder"
