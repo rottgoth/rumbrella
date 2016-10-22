@@ -1,3 +1,0 @@
-[submodule "apps/rumbl"]
-	path = apps/rumbl
-	url = git@github.com:rottgoth/rumbl.git
