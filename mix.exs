@@ -23,7 +23,7 @@ defmodule Rumbrella.Mixfile do
   defp deps do
     [
       {:edeliver, "~> 1.4.0"},
-      {:distillery, ">= 0.8.0", warn_missing: false},
+      {:distillery, ">= 0.10.1", warn_missing: false},
     ]
   end
 end

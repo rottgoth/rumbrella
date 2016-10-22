@@ -12,6 +12,7 @@ STAGING_HOSTS="52.53.159.106"
 STAGING_USER="deployer"
 TEST_AT="/home/rumbrella"
 
+RELEASE_CMD="mix"
 # PRODUCTION_HOSTS="deploy1.acme.org deploy2.acme.org" # deploy / production hosts separated by space
 # PRODUCTION_USER="production" # local user at deploy hosts
 # DELIVER_TO="/opt/my-erlang-app" # deploy directory on production hosts
@@ -34,6 +35,7 @@ pre_erlang_get_and_update_deps() {
 
 pre_erlang_clean_compile() {
   status "Preparing assets with: brunch build and phoenix.digest"
+  PACKAGE_JSON='package.json'
   __sync_remote "
     # runs the commands on the build host
     [ -f ~/.profile ] && source ~/.profile # load profile (optional)
@@ -44,15 +46,27 @@ pre_erlang_clean_compile() {
     # enter the build directory on the build host (required)
     cd '$BUILD_AT'
 
-    mkdir -p priv/static # required by the phoenix.digest task
+    # iterate each app in umbrella and build assets
+    for UMBRELLA_APP in \$(ls -1 apps | grep -v '$APP'); do
+      cd \"${BUILD_AT}/apps/\${UMBRELLA_APP}\" $SILENCE
 
-    # installing npm dependencies
-    npm install
+      if [ -f \"${PACKAGE_JSON}\" ]; then
+        echo \"Preparing \${UMBRELLA_APP} in umbrella...\" $SILENCE
+        mkdir -p priv/static # required by the phoenix.digest task
 
-    # building brunch
-    brunch build --production
+        # installing npm dependencies
+        npm install
 
-    # run your custom task
-    APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest $SILENCE
+        # building brunch
+        brunch build --production
+
+        # run your custom task
+        APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest $SILENCE
+
+        #APP=\"\$UMBRELLA_APP\" MIX_ENV='$TARGET_MIX_ENV' mix do deps.get, compile
+      fi
+    done
+
+    cd '$BUILD_AT'
   "
 }
