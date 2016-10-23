@@ -32,7 +32,7 @@ defmodule Rumbl.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Rumbl, []},
-     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :gettext,
+     applications: [:phoenix, :phoenix_pubsub, :phoenix_html, :cowboy, :logger, :logger_file_backend, :gettext,
                     :phoenix_ecto, :postgrex, :comeonin, :info_sys]]
   end
 
@@ -53,6 +53,7 @@ defmodule Rumbl.Mixfile do
      {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:info_sys, in_umbrella: true},
+     {:logger_file_backend, "~> 0.0.7"},
      {:comeonin, "~> 2.5"}]
   end
 

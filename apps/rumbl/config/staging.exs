@@ -21,6 +21,23 @@ config :rumbl, Rumbl.Endpoint,
 
 # Do not print debug messages in production
 config :logger, level: :info
+config :logger,
+  backends: [{LoggerFileBackend, :info},
+             {LoggerFileBackend, :error},
+             {LoggerFileBackend, :debug}]
+
+config :logger, :info,
+  path: "~/rumbrella/logs/info.log",
+  level: :info
+
+config :logger, :error,
+  path: "~/rumbrella/logs/error.log",
+  level: :error
+
+config :logger, :debug,
+  path: "~/rumbrella/logs/debug.log",
+  level: :debug
+
 
 # ## SSL Support
 #
