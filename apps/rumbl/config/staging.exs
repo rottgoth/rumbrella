@@ -27,15 +27,15 @@ config :logger,
              {LoggerFileBackend, :debug}]
 
 config :logger, :info,
-  path: "~/rumbrella/logs/info.log",
+  path: "logs/info.log",
   level: :info
 
 config :logger, :error,
-  path: "~/rumbrella/logs/error.log",
+  path: "logs/error.log",
   level: :error
 
 config :logger, :debug,
-  path: "~/rumbrella/logs/debug.log",
+  path: "logs/debug.log",
   level: :debug
 
 
