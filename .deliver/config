@@ -1,5 +1,5 @@
 APP="rumbrella"
-RELEASE_DIR="$BUILD_AT/apps/$APP/rel/$APP"
+
 MODE="debug"
 VERBOSE=true
 
@@ -10,9 +10,10 @@ BUILD_AT="/tmp/edeliver/rumbrella/builds"
 
 STAGING_HOSTS="52.53.159.106"
 STAGING_USER="deployer"
-TEST_AT="/home/rumbrella"
+TEST_AT="/home/deployer"
 
 RELEASE_CMD="mix"
+
 # PRODUCTION_HOSTS="deploy1.acme.org deploy2.acme.org" # deploy / production hosts separated by space
 # PRODUCTION_USER="production" # local user at deploy hosts
 # DELIVER_TO="/opt/my-erlang-app" # deploy directory on production hosts
