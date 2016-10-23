@@ -13,11 +13,6 @@ use Mix.Releases.Config,
 # when building in that environment, this combination of release
 # and environment configuration is called a profile
 
-environment :default do
-  set pre_start_hook: "rel/hooks/pre_start"
-  set post_start_hook: "rel/hooks/post_start"
-end
-
 environment :dev do
   set dev_mode: true
   set include_erts: false
@@ -28,6 +23,8 @@ environment :staging do
   set include_erts: true
   set include_src: false
   set cookie: :"n^>GcBv^}[zig4a-0z}|>Sq5{/BRZS@=M/qW[RqeO.CD3!LLyh:QsNc-[TdvVJOX"
+  set pre_start_hook: "rel/hooks/pre_start"
+  set post_start_hook: "rel/hooks/post_start"
 end
 
 environment :prod do
