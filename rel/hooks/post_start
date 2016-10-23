@@ -1,1 +1,1 @@
-echo "WE'VE STARTED!"
+echo "POST_START Time: $(date)" >> /home/deployer/mylog
