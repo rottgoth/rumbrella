@@ -1,1 +1,18 @@
-echo "POST_START Time: $(date)" >> /home/deployer/mylog
+echo "[$(date)] - POST_START" >> /home/deployer/mylog
+
+set +e
+
+while true; do  
+  nodetool ping
+  EXIT_CODE=$?
+  if [ $EXIT_CODE -eq 0 ]; then
+    echo "Application is up!"
+    break
+  fi
+done
+
+set -e
+
+echo "[$(date)] - Running migrations" >> /home/deployer/mylog
+bin/rumbrella rpc Elixir.Release.Tasks migrate
+echo "[$(date)] - Migrations run successfully" >> /home/deployer/mylog
